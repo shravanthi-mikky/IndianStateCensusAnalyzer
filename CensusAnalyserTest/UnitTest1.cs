@@ -12,7 +12,10 @@ namespace CensusAnalyserTest
         //wrong path
         string IndianStateCensusDataWrongFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\IndianStateCensusData.csv";
         string IndianStateCensusDataWrongExtensionFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\CensusAnalyserTest\IndiaCensusTextFile.txt";
+        string DelimiterIndianStateCensusDataFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\DelimiterIndiaStateCensusData.csv";
         string IndianStateCensusHeaders = "State,Population,AreaInSqKm,DensityPerSqKm";
+        string IndianStateCensusHeaders2 = "States,population,areaInSqKm,densityPerSqKm";
+
         CensusAnalyser censusAnalyser;
         Dictionary<string, CensusDTO> totalRecord;
         Dictionary<string, CensusDTO> stateRecord;
@@ -54,5 +57,31 @@ namespace CensusAnalyserTest
                 Assert.AreEqual("Invalid File Type", e.Message);
             }
         }
+        [Test]
+        public void GivenIndianCensusDataFile_IncorrectDelimiter_ShouldThrowCustomException()
+        {
+            try
+            {
+                IndianCensusAdapter a1 = new IndianCensusAdapter();
+                totalRecord = a1.LoadCensusData(DelimiterIndianStateCensusDataFilePath, IndianStateCensusHeaders);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Assert.AreEqual("File Contains Wrong Delimiter", e.Message);
+            }
+        }
+        [Test]
+        public void GivenIndianCensusDataFile_WrongHeader_ShouldThrowCustomException()
+        {
+            try
+            {
+                totalRecord = censusAnalyser.LoadCensusData(Country.INDIA, csvPath, IndianStateCensusHeaders2);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Assert.AreEqual("Incorrect header in Data", e.Message);
+            }
+        }
+
     }
 }
