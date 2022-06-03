@@ -18,7 +18,7 @@ string IndianStateCensusHeaders = "State,Population,AreaInSqKm,DensityPerSqKm";
 
 while (true)
 {
-    Console.WriteLine("Please choose the option: \n1)UC1 - Check the number of records in CSV file\n2)UC1.2 - Given wrong file Path\n3)UC1.3 - Giving wrong text file as Input\n4)UC1.4-Throw exception if Delimeter is wrong");
+    Console.WriteLine("Please choose the option: \n1)UC1 - Check the number of records in CSV file\n2)UC1.2 - Given wrong file Path\n3)UC1.3 - Giving wrong text file as Input\n4)UC1.4-Throw exception if Delimeter is Wrong");
     int option = Convert.ToInt32(Console.ReadLine());   
     switch(option)
     {
