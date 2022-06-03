@@ -9,7 +9,9 @@ namespace CensusAnalyserTest
     public class Tests
     {
         string csvPath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\IndiaStateCensusData.csv";
-        
+        //wrong path
+        string IndianStateCensusDataWrongFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\IndianStateCensusData.csv";
+
         string IndianStateCensusHeaders = "State,Population,AreaInSqKm,DensityPerSqKm";
         CensusAnalyser censusAnalyser;
         Dictionary<string, CensusDTO> totalRecord;
@@ -27,6 +29,18 @@ namespace CensusAnalyserTest
         {
             totalRecord = censusAnalyser.LoadCensusData(Country.INDIA, csvPath, IndianStateCensusHeaders);
             Assert.AreEqual(29, totalRecord.Count);
+        }
+        [Test]
+        public void GivenIndianCensusDataFile_IfIncorret_ShouldThrowCustomException()
+        {
+            try
+            {
+                totalRecord = censusAnalyser.LoadCensusData(Country.INDIA, IndianStateCensusDataWrongFilePath, IndianStateCensusHeaders);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Assert.AreEqual("File Not Found", e.Message);
+            }
         }
     }
 }
