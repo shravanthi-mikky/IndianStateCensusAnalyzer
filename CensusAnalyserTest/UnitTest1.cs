@@ -13,8 +13,14 @@ namespace CensusAnalyserTest
         string IndianStateCensusDataWrongFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\IndianStateCensusData.csv";
         string IndianStateCensusDataWrongExtensionFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\CensusAnalyserTest\IndiaCensusTextFile.txt";
         string DelimiterIndianStateCensusDataFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\DelimiterIndiaStateCensusData.csv";
+
+        string IndiaStateCodeCsvFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\IndiaStateCode.csv";
+
         string IndianStateCensusHeaders = "State,Population,AreaInSqKm,DensityPerSqKm";
         string IndianStateCensusHeaders2 = "States,population,areaInSqKm,densityPerSqKm";
+
+        string IndiaStateCodeHeaders = "SrNo,State Name,TIN,StateCode";
+
 
         CensusAnalyser censusAnalyser;
         Dictionary<string, CensusDTO> totalRecord;
@@ -81,6 +87,12 @@ namespace CensusAnalyserTest
             {
                 Assert.AreEqual("Incorrect header in Data", e.Message);
             }
+        }
+        [Test]
+        public void GivenIndiaStateCodeFile_WhenReaded_ShouldReturnStateCodeCount()
+        {
+            stateRecord = censusAnalyser.LoadCensusData(Country.INDIA, IndiaStateCodeCsvFilePath, IndiaStateCodeHeaders);
+            Assert.AreEqual(37, stateRecord.Count);
         }
 
     }
