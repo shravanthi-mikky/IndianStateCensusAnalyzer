@@ -15,6 +15,7 @@ namespace CensusAnalyserTest
         string DelimiterIndianStateCensusDataFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\DelimiterIndiaStateCensusData.csv";
 
         string IndiaStateCodeCsvFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\IndiaStateCode.csv";
+        string IndianStateCodeDataWrongFilePath = @"C:\Users\Admin\Desktop\CSharp\IndianStateCensusAnalyzer\IndianStateCensus_Analyser\IndianStateCode.csv";
 
         string IndianStateCensusHeaders = "State,Population,AreaInSqKm,DensityPerSqKm";
         string IndianStateCensusHeaders2 = "States,population,areaInSqKm,densityPerSqKm";
@@ -88,12 +89,25 @@ namespace CensusAnalyserTest
                 Assert.AreEqual("Incorrect header in Data", e.Message);
             }
         }
+        //for UC2
         [Test]
         public void GivenIndiaStateCodeFile_WhenReaded_ShouldReturnStateCodeCount()
         {
             stateRecord = censusAnalyser.LoadCensusData(Country.INDIA, IndiaStateCodeCsvFilePath, IndiaStateCodeHeaders);
             Assert.AreEqual(37, stateRecord.Count);
         }
-
+        //UC 2.2
+        [Test]
+        public void GivenIndiaStateCodeFile_IfIncorret_ShouldThrowCustomException()
+        {
+            try
+            {
+                stateRecord = censusAnalyser.LoadCensusData(Country.INDIA, IndianStateCodeDataWrongFilePath, IndiaStateCodeHeaders);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Assert.AreEqual("File Not Found", e.Message);
+            }
+        }
     }
 }
