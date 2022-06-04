@@ -22,6 +22,8 @@ string DelimeterIndiaStateCode = @"C:\Users\Admin\Desktop\CSharp\IndianStateCens
 string IndianStateCensusHeaders = "State,Population,AreaInSqKm,DensityPerSqKm";
 string IndianStateCensusHeaders2 = "States,population,areaInSqKm,densityPerSqKm";
 string IndiaStateCodeHeaders = "SrNo,State Name,TIN,StateCode";
+string IndiaStateCodeHeaders2 = "srNo,state name,tin,stateCode";
+
 
 while (true)
 {
@@ -93,6 +95,16 @@ while (true)
             {
                 IndianCensusAdapter a1 = new IndianCensusAdapter();
                 stateRecord = a1.LoadCensusData(DelimeterIndiaStateCode, IndiaStateCodeHeaders);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            break;
+        case 9:
+            try
+            {
+                stateRecord = censusAnalyser.LoadCensusData(Country.INDIA, IndiaStateCodeCsvFilePath, IndiaStateCodeHeaders2);
             }
             catch (CensusAnalyserException e)
             {

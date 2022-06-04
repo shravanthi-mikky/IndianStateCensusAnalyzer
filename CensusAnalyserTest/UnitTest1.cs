@@ -22,6 +22,7 @@ namespace CensusAnalyserTest
         string IndianStateCensusHeaders2 = "States,population,areaInSqKm,densityPerSqKm";
 
         string IndiaStateCodeHeaders = "SrNo,State Name,TIN,StateCode";
+        string IndiaStateCodeHeaders2 = "srNo,state name,tin,stateCode";
 
 
         CensusAnalyser censusAnalyser;
@@ -117,11 +118,24 @@ namespace CensusAnalyserTest
             try
             {
                 IndianCensusAdapter a1 = new IndianCensusAdapter();
-                stateRecord = a1.LoadCensusData(DelimeterIndiaStateCode, IndianStateCensusHeaders);
+                stateRecord = a1.LoadCensusData(DelimeterIndiaStateCode, IndiaStateCodeHeaders);
             }
             catch (CensusAnalyserException e)
             {
                 Assert.AreEqual("File Contains Wrong Delimiter", e.Message);
+            }
+        }
+        //UC 2.5
+        [Test]
+        public void GivenIndiaStateCode_WrongHeader_ShouldThrowCustomException()
+        {
+            try
+            {
+                stateRecord = censusAnalyser.LoadCensusData(Country.INDIA, IndiaStateCodeCsvFilePath, IndiaStateCodeHeaders2);
+            }
+            catch (CensusAnalyserException e)
+            {
+                Assert.AreEqual("Incorrect header in Data", e.Message);
             }
         }
     }
