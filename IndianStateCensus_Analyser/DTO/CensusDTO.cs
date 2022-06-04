@@ -8,10 +8,10 @@ namespace IndianStateCensus_Analyser.POCO
 {
     public class CensusDTO
     {
-        public int serialNumber;
+        public string serialNumber;
         public string stateName;
         public string state;
-        public int tin;
+        public string tin;
         public string stateCode;
         public string population;
         public string area;
